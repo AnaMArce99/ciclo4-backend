@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  # MongoDB services
+  instaya_db:
+    container_name: instaya_db
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - instaya_db:/data/db
+
+  # Node API service
+  instaya_api:
+    container_name: instaya_app
+    build: .
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - instaya_db
+
+volumes:
+  instaya_db: {}

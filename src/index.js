@@ -1,3 +1,8 @@
-import App from "./app.js"
-App.listen(8000)
-console.log("Server on port",8000)
+import app from "./app.js";
+import { PORT } from "./config.js";
+import { connectDB } from "./db/connect";
+
+connectDB();
+
+app.listen(PORT);
+console.log("Server on port", app.get("port"));
